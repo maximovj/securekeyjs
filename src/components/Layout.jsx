@@ -23,7 +23,7 @@ const Layout = () => {
                                 <a href={routes.PasswordByType} className="hover:text-green-400">Por tipo</a>
                             </li>
                             <li>
-                                <a href={routes.Root} className="hover:text-green-400">Contact</a>
+                                <a href={routes.PasswordFromText} className="hover:text-green-400">Por texto</a>
                             </li>
                         </ul>
                     </nav>
