@@ -49,7 +49,8 @@ const PasswordByType = () => {
         <Container>
             <h1 className="text-3xl font-bold mb-6">Generador de contraseñas por tipo</h1>
             <div className="mb-4 w-full max-w-2xl">
-                <label htmlFor="keyType" className="block mb-2">Selecciona un tipo de clave:</label>
+                <label htmlFor="keyType" className="block mb-2">Selecciona un tipo de clave:
+                </label>
                 <select
                     id="keyType"
                     className="border border-gray-700 rounded p-2 bg-gray-800 text-white w-full"

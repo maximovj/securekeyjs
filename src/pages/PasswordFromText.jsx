@@ -18,12 +18,6 @@ const PasswordFromText = () => {
         return randomText;
     };
 
-    useEffect(() => {
-        // Cada vez que cambie la longitud, generamos un nuevo texto aleatorio
-        const newRandomText = generateRandomText(length);
-        setBaseText(newRandomText);
-    }, [length]);
-
     const generateRandomLength = () => {
         return Math.floor(Math.random() * (64 - 6 + 1)) + 6;
     };
@@ -77,11 +71,29 @@ const PasswordFromText = () => {
         alert('Contraseña copiada al portapapeles!');
     };
 
+    useEffect(() => {
+        const newRandomText = generateRandomText(length);
+        setBaseText(newRandomText);
+    }, [length]);
+
+    useEffect(() => {
+        handleGenerateFromText();
+    }, [baseText]);
+
     return (
         <Container>
             <h1 className="text-3xl font-bold mb-4">Generador de contraseñas por texto</h1>
             <div className="mb-4 w-full max-w-2xl">
-                <label htmlFor="length" className="block mb-2">Longitud Aleatoria: {length}</label>
+                <label htmlFor="length" className="block mb-2">Longitud Aleatoria:
+                    <input
+                        type="number"
+                        value={length}
+                        onChange={(e) => setLength(e.target.value)}
+                        className="border border-gray-700 rounded p-2 bg-gray-800 text-white mx-2"
+                        min="6"
+                        max="64"
+                    />
+                </label>
                 <input
                     type="range"
                     id="length"

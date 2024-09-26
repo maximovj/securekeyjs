@@ -87,7 +87,7 @@ const PasswordByLength = () => {
                         type="number"
                         value={length}
                         onChange={(e) => setLength(e.target.value)}
-                        className="border border-gray-700 rounded p-2 bg-gray-800 text-white mt-2"
+                        className="border border-gray-700 rounded p-2 bg-gray-800 text-white mx-2"
                         min="6"
                         max="64"
                     />
