@@ -2,11 +2,10 @@ import routes from '../routes/routes.js';
 
 const NavBar = () => {
     return (<nav>
-        <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
+        <a href={routes.Root} className="hover:text-green-400">
+            <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
+        </a>
         <ul className="flex space-x-4">
-            <li>
-                <a href={routes.Root} className="hover:text-green-400">Inicio</a>
-            </li>
             <li>
                 <a href={routes.PasswordByLength} className="hover:text-green-400">Por Longitud</a>
             </li>
