@@ -73,7 +73,7 @@ const PasswordFromText = () => {
     };
 
     const handleGenerateFromText = () => {
-        const initialPasswords = Array(4)
+        const initialPasswords = Array(6)
             .fill()
             .map(() => generatePasswordInfo());
         setPasswords(initialPasswords);
@@ -134,7 +134,7 @@ const PasswordFromText = () => {
                 </button>
             </div>
             <div className="w-full max-w-full">
-                <h2 className="text-xl font-semibold mb-4">4 Contraseñas Generadas:</h2>
+                <h2 className="text-xl font-semibold mb-4">{passwords.length} contraseñas generadas:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {passwords.map((password, index) => (
                         <PasswordCard

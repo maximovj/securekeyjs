@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { FaClipboard } from 'react-icons/fa';
 import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 import PasswordCard from '../components/PasswordCard';
@@ -17,7 +16,7 @@ const keyTypes = [
 
 const PasswordByType = () => {
     const [selectedKeyType, setSelectedKeyType] = useState(keyTypes[0]); // Inicializado con '160-bit WPA Key'
-    const [passwords, setPasswords] = useState(Array(4).fill(''));
+    const [passwords, setPasswords] = useState([]);
     const showToast = useToast();
 
     // Función para generar una contraseña aleatoria
@@ -69,7 +68,7 @@ const PasswordByType = () => {
     // Función para generar las contraseñas
     const handleGenerate = () => {
         if (selectedKeyType) {
-            const newPasswords = Array.from({ length: 4 }, () => generatePasswordInfo(selectedKeyType.length));
+            const newPasswords = Array(6).fill().map(() => generatePasswordInfo(selectedKeyType.length));
             setPasswords(newPasswords);
         }
     };
@@ -110,7 +109,7 @@ const PasswordByType = () => {
                 </button>
             </div>
             <div className="w-full max-w-full">
-                <h2 className="text-xl font-semibold mb-4">4 Contraseñas generadas:</h2>
+                <h2 className="text-xl font-semibold mb-4">{passwords.length} contraseñas generadas:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {passwords.map((password, index) => (
                         <PasswordCard
