@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { FaClipboard } from 'react-icons/fa';
 import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
+import PasswordCard from '../components/PasswordCard';
 
 const PasswordByLength = () => {
     const [length, setLength] = useState(12);
@@ -116,27 +116,12 @@ const PasswordByLength = () => {
                 <h2 className="text-xl font-semibold mb-4">4 Contraseñas generadas:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {passwords.map((item, index) => (
-                        <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between">
-                            <div>
-                                <p className="text-lg"><span className="font-bold break-words text-sm p-2 bg-gray-700 w-full rounded-lg">{item.password}</span></p>
-                                <p className={`mt-2 ${item.strength === 'Fuerte' ? 'text-green-400' : item.strength === 'Media' ? 'text-yellow-400' : 'text-red-400'}`}>
-                                    Fortaleza: <span className="font-bold text-sm">{item.strength}</span>
-                                </p>
-                                <p className="mt-1 text-gray-300 text-sm">Longitud: <span className="font-bold">{item.length}</span></p>
-                                <div className="mt-2">
-                                    <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{item.includesUppercase ? 'Sí' : 'No'}</span></p>
-                                    <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{item.includesLowercase ? 'Sí' : 'No'}</span></p>
-                                    <p className="text-gray-300 text-sm">Números: <span className="font-bold">{item.includesNumbers ? 'Sí' : 'No'}</span></p>
-                                    <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{item.includesSpecialChars ? 'Sí' : 'No'}</span></p>
-                                </div>
-                            </div>
-                            <button
-                                onClick={() => copyToClipboard(item.password)}
-                                className="bg-yellow-500 hover:bg-yellow-400 text-white py-1 px-2 rounded mt-4 flex items-center self-start"
-                            >
-                                <FaClipboard className="mr-1" /> Copiar
-                            </button>
-                        </div>
+                        <PasswordCard
+                            index={index}
+                            item={item}
+                            key={index}
+                            copyToClipboard={copyToClipboard}
+                        />
                     ))}
                 </div>
             </div>

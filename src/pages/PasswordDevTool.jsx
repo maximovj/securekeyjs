@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { FaClipboard } from 'react-icons/fa';
 import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
+import PasswordCard from '../components/PasswordCard';
 
 const devTools = [
     { name: 'JWT Secret Key', length: 64 },
@@ -114,36 +114,13 @@ const DevToolPasswordGenerator = () => {
                 <h2 className="text-xl font-semibold mb-4">{devTools.length} Contraseñas generadas:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                     {passwords.map((tool, index) => (
-                        <div key={index} className="bg-gray-800 p-4 rounded shadow-lg flex flex-col justify-between">
-                            <div>
-                                <h2 className="text-xl font-bold">{tool.name}</h2>
-                                <p className="break-words text-sm p-2 bg-gray-700 w-full rounded-lg">
-                                    {tool.password}
-                                </p>
-                                <p className={`mt-2 text-sm ${tool.strength === 'Fuerte' ? 'text-green-400' : tool.strength === 'Media' ? 'text-yellow-400' : 'text-red-400'}`}>
-                                    Fortaleza: <span className="font-bold">{tool.strength}</span>
-                                </p>
-                                <p className="mt-1 text-gray-300 text-sm">Longitud: <span className="font-bold">{tool.length}</span></p>
-                                <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{tool.includesUppercase ? 'Sí' : 'No'}</span></p>
-                                <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{tool.includesLowercase ? 'Sí' : 'No'}</span></p>
-                                <p className="text-gray-300 text-sm">Números: <span className="font-bold">{tool.includesNumbers ? 'Sí' : 'No'}</span></p>
-                                <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{tool.includesSpecialChars ? 'Sí' : 'No'}</span></p>
-                            </div>
-                            <div className="mt-4 flex flex-col sm:flex-row gap-2">
-                                <button
-                                    onClick={() => regeneratePassword(index)}
-                                    className="bg-purple-500 hover:bg-purple-400 text-white py-1 px-2 rounded"
-                                >
-                                    Regenerar
-                                </button>
-                                <button
-                                    onClick={() => copyToClipboard(tool.password)}
-                                    className="bg-yellow-500 hover:bg-yellow-400 text-white py-1 px-2 rounded flex items-center justify-center"
-                                >
-                                    <FaClipboard className="mr-1" /> Copiar
-                                </button>
-                            </div>
-                        </div>
+                        <PasswordCard
+                            index={index}
+                            item={tool}
+                            key={index}
+                            regeneratePassword={regeneratePassword}
+                            copyToClipboard={copyToClipboard}
+                        />
                     ))}
                 </div>
             </div>
