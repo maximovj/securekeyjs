@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import Container from '../components/Container';
 
 const PasswordFromText = () => {
     const [baseText, setBaseText] = useState('');
@@ -77,7 +78,7 @@ const PasswordFromText = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+        <Container>
             <h1 className="text-3xl font-bold mb-4">Generador de contraseñas por texto</h1>
             <div className="mb-4 w-full max-w-2xl">
                 <label htmlFor="length" className="block mb-2">Longitud Aleatoria: {length}</label>
@@ -129,7 +130,7 @@ const PasswordFromText = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }
 

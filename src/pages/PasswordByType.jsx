@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import Container from '../components/Container';
 
 const keyTypes = [
     { name: '160-bit WPA Key', length: 20 },
@@ -45,7 +46,7 @@ const PasswordByType = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+        <Container>
             <h1 className="text-3xl font-bold mb-6">Generador de contraseñas por tipo</h1>
             <div className="mb-4 w-full max-w-2xl">
                 <label htmlFor="keyType" className="block mb-2">Selecciona un tipo de clave:</label>
@@ -89,7 +90,7 @@ const PasswordByType = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 

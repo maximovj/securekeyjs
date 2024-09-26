@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLink } from 'react-icons/fa';
+import Container from '../components/Container';
 import routes from '../routes/routes.js';
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-start bg-gray-900 text-white p-4">
+        <Container>
             <div className="w-full max-w-4xl">
                 <div className="grid grid-cols-1 sm:grid-cols-1 gap-6">
                     {cards.map((card, index) => (
@@ -56,7 +57,7 @@ const Home = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }
 

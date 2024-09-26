@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import Container from '../components/Container';
 
 const devTools = [
     { name: 'JWT Secret Key', length: 64 },
@@ -73,7 +74,7 @@ const DevToolPasswordGenerator = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+        <Container>
             <h1 className="text-3xl font-bold mb-6">Generador de contraseñas para herramientas de desarrollo</h1>
             <div className='w-full max-w-full'>
                 <h2 className="text-xl font-semibold mb-4">{devTools.length} Contraseñas generadas:</h2>
@@ -102,7 +103,7 @@ const DevToolPasswordGenerator = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 

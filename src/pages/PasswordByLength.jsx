@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import Container from '../components/Container';
 
 const PasswordByLength = () => {
     const [length, setLength] = useState(12);
@@ -78,7 +79,7 @@ const PasswordByLength = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+        <Container>
             <h1 className="text-3xl font-bold mb-6">Generador de contraseñas por longitud</h1>
             <div className="mb-4 w-full max-w-2xl">
                 <label htmlFor="length" className="block mb-2">Longitud de la Contraseña:
@@ -137,7 +138,7 @@ const PasswordByLength = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }
 
