@@ -49,21 +49,47 @@ const generatePassword = (length) => {
 const DevToolPasswordGenerator = () => {
     const [passwords, setPasswords] = useState([]);
 
-    useEffect(() => {
-        // Generar contraseñas automáticamente al cargar la página
-        const generatedPasswords = devTools.map(tool => ({
-            name: tool.name,
-            password: generatePassword(tool.length),
-            length: tool.length,
-        }));
-        setPasswords(generatedPasswords);
-    }, []);
+    // Función para evaluar la fortaleza de la contraseña
+    const evaluateStrength = (password) => {
+        let strength = 'Débil';
+        const lengthCriteria = password.length >= 12;
+        const numberCriteria = /[0-9]/.test(password);
+        const lowercaseCriteria = /[a-z]/.test(password);
+        const uppercaseCriteria = /[A-Z]/.test(password);
+        const specialCharCriteria = /[!@#$%^&*()_\-+=<>?]/.test(password);
+
+        const criteriaMet = [lengthCriteria, numberCriteria, lowercaseCriteria, uppercaseCriteria, specialCharCriteria].filter(Boolean).length;
+
+        if (criteriaMet >= 4) {
+            strength = 'Fuerte';
+        } else if (criteriaMet === 3) {
+            strength = 'Media';
+        }
+
+        return strength;
+    };
+
+    // Función para generar la información de una contraseña
+    const generatePasswordInfo = (devTool) => {
+        const newPassword = generatePassword(devTool.length);
+        return {
+            ...devTool,
+            password: newPassword,
+            strength: evaluateStrength(newPassword),
+            length: newPassword.length,
+            generatedAt: new Date().toLocaleString(),
+            includesUppercase: /[A-Z]/.test(newPassword),
+            includesLowercase: /[a-z]/.test(newPassword),
+            includesNumbers: /[0-9]/.test(newPassword),
+            includesSpecialChars: /[!@#$%^&*()_\-+=<>?]/.test(newPassword),
+        };
+    };
 
     const regeneratePassword = (index) => {
-        const newPassword = generatePassword(passwords[index].length);
+        const newPassword = generatePasswordInfo(passwords[index]);
         setPasswords(prevPasswords => {
             const updatedPasswords = [...prevPasswords];
-            updatedPasswords[index].password = newPassword;
+            updatedPasswords[index] = newPassword;
             return updatedPasswords;
         });
     };
@@ -72,6 +98,12 @@ const DevToolPasswordGenerator = () => {
         navigator.clipboard.writeText(password);
         alert('Contraseña copiada al portapapeles!');
     };
+
+    useEffect(() => {
+        // Generar contraseñas automáticamente al cargar la página
+        const generatedPasswords = devTools.map(tool => generatePasswordInfo(tool));
+        setPasswords(generatedPasswords);
+    }, []);
 
     return (
         <Container>
@@ -83,7 +115,17 @@ const DevToolPasswordGenerator = () => {
                         <div key={index} className="bg-gray-800 p-4 rounded shadow-lg flex flex-col justify-between">
                             <div>
                                 <h2 className="text-xl font-bold">{tool.name}</h2>
-                                <p className="mt-2 break-words bg-gray-700 p-2 rounded-lg text-sm font-mono">{tool.password}</p>
+                                <p className="break-words text-sm p-2 bg-gray-700 w-full rounded-lg">
+                                    {tool.password}
+                                </p>
+                                <p className={`mt-2 text-sm ${tool.strength === 'Fuerte' ? 'text-green-400' : tool.strength === 'Media' ? 'text-yellow-400' : 'text-red-400'}`}>
+                                    Fortaleza: <span className="font-bold">{tool.strength}</span>
+                                </p>
+                                <p className="mt-1 text-gray-300 text-sm">Longitud: <span className="font-bold">{tool.length}</span></p>
+                                <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{tool.includesUppercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{tool.includesLowercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Números: <span className="font-bold">{tool.includesNumbers ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{tool.includesSpecialChars ? 'Sí' : 'No'}</span></p>
                             </div>
                             <div className="mt-4 flex flex-col sm:flex-row gap-2">
                                 <button
