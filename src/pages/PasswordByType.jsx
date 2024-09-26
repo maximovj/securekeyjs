@@ -13,24 +13,60 @@ const keyTypes = [
     { name: 'CodeIgniter Encryption Key', length: 32 },
 ];
 
-const generatePassword = (length) => {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
-    let password = "";
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        password += charset[randomIndex];
-    }
-    return password;
-};
-
 const PasswordByType = () => {
     const [selectedKeyType, setSelectedKeyType] = useState(keyTypes[0]); // Inicializado con '160-bit WPA Key'
     const [passwords, setPasswords] = useState(Array(4).fill(''));
 
+    // Función para generar una contraseña aleatoria
+    const generatePassword = (length) => {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset[randomIndex];
+        }
+        return password;
+    };
+
+    // Función para evaluar la fortaleza de la contraseña
+    const evaluateStrength = (password) => {
+        let strength = 'Débil';
+        const lengthCriteria = password.length >= 12;
+        const numberCriteria = /[0-9]/.test(password);
+        const lowercaseCriteria = /[a-z]/.test(password);
+        const uppercaseCriteria = /[A-Z]/.test(password);
+        const specialCharCriteria = /[!@#$%^&*()_\-+=<>?]/.test(password);
+
+        const criteriaMet = [lengthCriteria, numberCriteria, lowercaseCriteria, uppercaseCriteria, specialCharCriteria].filter(Boolean).length;
+
+        if (criteriaMet >= 4) {
+            strength = 'Fuerte';
+        } else if (criteriaMet === 3) {
+            strength = 'Media';
+        }
+
+        return strength;
+    };
+
+    // Función para generar la información de una contraseña
+    const generatePasswordInfo = (length) => {
+        const newPassword = generatePassword(length);
+        return {
+            password: newPassword,
+            strength: evaluateStrength(newPassword),
+            length: newPassword.length,
+            generatedAt: new Date().toLocaleString(),
+            includesUppercase: /[A-Z]/.test(newPassword),
+            includesLowercase: /[a-z]/.test(newPassword),
+            includesNumbers: /[0-9]/.test(newPassword),
+            includesSpecialChars: /[!@#$%^&*()_\-+=<>?]/.test(newPassword),
+        };
+    };
+
     // Función para generar las contraseñas
     const handleGenerate = () => {
         if (selectedKeyType) {
-            const newPasswords = Array.from({ length: 4 }, () => generatePassword(selectedKeyType.length));
+            const newPasswords = Array.from({ length: 4 }, () => generatePasswordInfo(selectedKeyType.length));
             setPasswords(newPasswords);
         }
     };
@@ -76,13 +112,20 @@ const PasswordByType = () => {
                     {passwords.map((password, index) => (
                         <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between">
                             <div>
-                                <p className="text-lg break-words text-sm p-2 bg-gray-700 w-full rounded-lg">
-                                    {password}
+                                <p className="break-words text-sm p-2 bg-gray-700 w-full rounded-lg">
+                                    {password.password}
+                                </p>
+                                <p className={`mt-2 ${password.strength === 'Fuerte' ? 'text-green-400' : password.strength === 'Media' ? 'text-yellow-400' : 'text-red-400'}`}>
+                                    Fortaleza: <span className="font-bold text-sm">{password.strength}</span>
                                 </p>
                                 <p className="mt-1 text-gray-300 text-sm">Longitud: <span className="font-bold">{password.length}</span></p>
+                                <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{password.includesUppercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{password.includesLowercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Números: <span className="font-bold">{password.includesNumbers ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{password.includesSpecialChars ? 'Sí' : 'No'}</span></p>
                             </div>
                             <button
-                                onClick={() => copyToClipboard(password)}
+                                onClick={() => copyToClipboard(password.password)}
                                 className="bg-yellow-500 hover:bg-yellow-400 text-white py-1 px-2 rounded mt-4 flex items-center self-start"
                             >
                                 <FaClipboard className="mr-1" /> Copiar
