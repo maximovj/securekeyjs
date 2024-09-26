@@ -1,22 +1,23 @@
 import routes from '../routes/routes.js';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (<nav>
-        <a href={routes.Root} className="hover:text-green-400">
+        <Link to={routes.Root} className="hover:text-green-400">
             <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
-        </a>
+        </Link>
         <ul className="flex space-x-4">
             <li>
-                <a href={routes.PasswordByLength} className="hover:text-green-400">Por Longitud</a>
+                <Link to={routes.PasswordByLength} className="hover:text-green-400">Por Longitud</Link>
             </li>
             <li>
-                <a href={routes.PasswordByType} className="hover:text-green-400">Por Tipo</a>
+                <Link to={routes.PasswordByType} className="hover:text-green-400">Por Tipo</Link>
             </li>
             <li>
-                <a href={routes.PasswordFromText} className="hover:text-green-400">Por Texto</a>
+                <Link to={routes.PasswordFromText} className="hover:text-green-400">Por Texto</Link>
             </li>
             <li>
-                <a href={routes.PasswordDevTool} className="hover:text-green-400">Para DevTools</a>
+                <Link to={routes.PasswordDevTool} className="hover:text-green-400">Para DevTools</Link>
             </li>
         </ul>
     </nav>);
