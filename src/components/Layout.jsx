@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import routes from '../routes/routes.js';
 
 const Layout = () => {
     return (
@@ -6,10 +7,33 @@ const Layout = () => {
             {/* Header */}
             <header className="bg-gray-800 p-4 shadow-md">
                 <div className="container mx-auto flex justify-between items-center">
-                    <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
+
+                    {/* Left-side Menu Items */}
+                    <nav>
+                        {/* Center Title */}
+                        <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
+                        <ul className="flex space-x-4">
+                            <li>
+                                <a href={routes.Root} className="hover:text-green-400">Home</a>
+                            </li>
+                            <li>
+                                <a href={routes.Root} className="hover:text-green-400">Home</a>
+                            </li>
+                            <li>
+                                <a href={routes.Root} className="hover:text-green-400">About</a>
+                            </li>
+                            <li>
+                                <a href={routes.Root} className="hover:text-green-400">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    {/* Right-side Menu Items */}
                     <nav>
                         <ul className="flex space-x-4">
-                            <li><small>v1.0Beta</small></li>
+                            <li>
+                                <small>v1.0Beta</small>
+                            </li>
                         </ul>
                     </nav>
                 </div>
