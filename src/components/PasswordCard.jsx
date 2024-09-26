@@ -34,6 +34,23 @@ const PasswordCard = ({ index, item, regeneratePassword, copyToClipboard }) => {
                 <p className="text-gray-300 text-sm">
                     Caracteres Especiales: <span className="font-bold">{item.includesSpecialChars ? 'Sí' : 'No'}</span>
                 </p>
+                {item.zxcvbn && (<>
+                    <p className="text-gray-300 text-sm">
+                        Un atacante sin limitación: <span className="font-bold">{item.zxcvbn.crack_times_display.online_no_throttling_10_per_second}</span>
+                    </p>
+                    <p className="text-gray-300 text-sm">
+                        Multiples atacantes: <span className="font-bold">{item.zxcvbn.crack_times_display.offline_slow_hashing_1e4_per_second}</span>
+                    </p>
+                    <p className="text-gray-300 text-sm">
+                        Ataques por 10B/sec: <span className="font-bold">{item.zxcvbn.crack_times_display.offline_fast_hashing_1e10_per_second}</span>
+                    </p>
+                    <p className="text-gray-300 text-sm">
+                        Advertencias: <span className="font-bold">{item.zxcvbn.feedback.warning}</span>
+                    </p>
+                    <p className="text-gray-300 text-sm">
+                        Sugerencias: <span className="font-bold">{item.zxcvbn.feedback.suggestions}</span>
+                    </p>
+                </>)}
             </div>
             <div className="mt-4 flex flex-col sm:flex-row gap-2">
                 {regeneratePassword && (

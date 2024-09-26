@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaClipboard } from 'react-icons/fa';
+import zxcvbn from 'zxcvbn';
 import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 import PasswordCard from '../components/PasswordCard';
@@ -36,35 +36,17 @@ const PasswordFromText = () => {
         return password;
     };
 
-    // Función para evaluar la fortaleza de la contraseña
-    const evaluateStrength = (password) => {
-        let strength = 'Débil';
-        const lengthCriteria = password.length >= 12;
-        const numberCriteria = /[0-9]/.test(password);
-        const lowercaseCriteria = /[a-z]/.test(password);
-        const uppercaseCriteria = /[A-Z]/.test(password);
-        const specialCharCriteria = /[!@#$%^&*()_\-+=<>?]/.test(password);
-
-        const criteriaMet = [lengthCriteria, numberCriteria, lowercaseCriteria, uppercaseCriteria, specialCharCriteria].filter(Boolean).length;
-
-        if (criteriaMet >= 4) {
-            strength = 'Fuerte';
-        } else if (criteriaMet === 3) {
-            strength = 'Media';
-        }
-
-        return strength;
-    };
-
     // Función para generar la información de una contraseña
     const generatePasswordInfo = () => {
         const randomLength = generateRandomLength();
         const newPassword = generatePasswordFromBase(baseText, randomLength);
+        const zxcvbnResult = zxcvbn(newPassword);
         return {
             password: newPassword,
-            strength: evaluateStrength(newPassword),
+            strength: zxcvbnResult.score >= 3 ? 'Fuerte' : zxcvbnResult.score === 2 ? 'Media' : 'Débil',
             length: newPassword.length,
             generatedAt: new Date().toLocaleString(),
+            zxcvbn: zxcvbnResult,
             includesUppercase: /[A-Z]/.test(newPassword),
             includesLowercase: /[a-z]/.test(newPassword),
             includesNumbers: /[0-9]/.test(newPassword),

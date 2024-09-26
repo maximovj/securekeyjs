@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import zxcvbn from 'zxcvbn';
 import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 import PasswordCard from '../components/PasswordCard';
@@ -74,12 +75,14 @@ const DevToolPasswordGenerator = () => {
     // Función para generar la información de una contraseña
     const generatePasswordInfo = (devTool) => {
         const newPassword = generatePassword(devTool.length);
+        const zxcvbnResult = zxcvbn(newPassword);
         return {
             ...devTool,
             password: newPassword,
-            strength: evaluateStrength(newPassword),
+            strength: zxcvbnResult.score >= 3 ? 'Fuerte' : zxcvbnResult.score === 2 ? 'Media' : 'Débil',
             length: newPassword.length,
             generatedAt: new Date().toLocaleString(),
+            zxcvbn: zxcvbnResult,
             includesUppercase: /[A-Z]/.test(newPassword),
             includesLowercase: /[a-z]/.test(newPassword),
             includesNumbers: /[0-9]/.test(newPassword),
