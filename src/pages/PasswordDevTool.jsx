@@ -88,7 +88,7 @@ const DevToolPasswordGenerator = () => {
                             <div className="mt-4 flex flex-col sm:flex-row gap-2">
                                 <button
                                     onClick={() => regeneratePassword(index)}
-                                    className="bg-blue-500 hover:bg-blue-400 text-white py-1 px-2 rounded"
+                                    className="bg-purple-500 hover:bg-purple-400 text-white py-1 px-2 rounded"
                                 >
                                     Regenerar
                                 </button>
