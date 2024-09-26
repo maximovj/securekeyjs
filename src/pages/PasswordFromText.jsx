@@ -33,6 +33,7 @@ const PasswordFromText = () => {
         return password;
     };
 
+    // Función para evaluar la fortaleza de la contraseña
     const evaluateStrength = (password) => {
         let strength = 'Débil';
         const lengthCriteria = password.length >= 12;
@@ -52,18 +53,27 @@ const PasswordFromText = () => {
         return strength;
     };
 
-    const handleGenerateFromText = () => {
-        const newPasswords = [];
-        for (let i = 0; i < 4; i++) {
-            const randomLength = generateRandomLength();
-            const newPassword = generatePasswordFromBase(baseText, randomLength);
-            const passwordStrength = evaluateStrength(newPassword);
-            const passwordLength = newPassword.length;
-            const generatedAt = new Date().toLocaleString();
+    // Función para generar la información de una contraseña
+    const generatePasswordInfo = () => {
+        const randomLength = generateRandomLength();
+        const newPassword = generatePasswordFromBase(baseText, randomLength);
+        return {
+            password: newPassword,
+            strength: evaluateStrength(newPassword),
+            length: newPassword.length,
+            generatedAt: new Date().toLocaleString(),
+            includesUppercase: /[A-Z]/.test(newPassword),
+            includesLowercase: /[a-z]/.test(newPassword),
+            includesNumbers: /[0-9]/.test(newPassword),
+            includesSpecialChars: /[!@#$%^&*()_\-+=<>?]/.test(newPassword),
+        };
+    };
 
-            newPasswords.push({ password: newPassword, strength: passwordStrength, length: passwordLength, generatedAt });
-        }
-        setPasswords(newPasswords);
+    const handleGenerateFromText = () => {
+        const initialPasswords = Array(4)
+            .fill()
+            .map(() => generatePasswordInfo());
+        setPasswords(initialPasswords);
     };
 
     const copyToClipboard = (password) => {
@@ -123,17 +133,23 @@ const PasswordFromText = () => {
             <div className="w-full max-w-full">
                 <h2 className="text-xl font-semibold mb-4">4 Contraseñas Generadas:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {passwords.map((item, index) => (
+                    {passwords.map((password, index) => (
                         <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between">
                             <div>
-                                <p className="text-lg"><span className="font-bold break-words text-sm">{item.password}</span></p>
-                                <p className={`mt-2 text-sm ${item.strength === 'Fuerte' ? 'text-green-400' : item.strength === 'Media' ? 'text-yellow-400' : 'text-red-400'}`}>
-                                    Fortaleza: <span className="font-bold">{item.strength}</span>
+                                <p className="break-words text-sm p-2 bg-gray-700 w-full rounded-lg">
+                                    {password.password}
                                 </p>
-                                <p className="mt-1 text-base text-gray-300">Longitud: <span className="font-bold">{item.length}</span></p>
+                                <p className={`mt-2 text-sm ${password.strength === 'Fuerte' ? 'text-green-400' : password.strength === 'Media' ? 'text-yellow-400' : 'text-red-400'}`}>
+                                    Fortaleza: <span className="font-bold">{password.strength}</span>
+                                </p>
+                                <p className="mt-1 text-gray-300 text-sm">Longitud: <span className="font-bold">{password.length}</span></p>
+                                <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{password.includesUppercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{password.includesLowercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Números: <span className="font-bold">{password.includesNumbers ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{password.includesSpecialChars ? 'Sí' : 'No'}</span></p>
                             </div>
                             <button
-                                onClick={() => copyToClipboard(item.password)}
+                                onClick={() => copyToClipboard(password.password)}
                                 className="bg-yellow-500 hover:bg-yellow-400 text-white py-1 px-2 rounded mt-4 flex items-center self-start"
                             >
                                 <FaClipboard className="mr-1" /> Copiar
