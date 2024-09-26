@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 
 const devTools = [
@@ -48,6 +49,7 @@ const generatePassword = (length) => {
 
 const DevToolPasswordGenerator = () => {
     const [passwords, setPasswords] = useState([]);
+    const showToast = useToast();
 
     // Función para evaluar la fortaleza de la contraseña
     const evaluateStrength = (password) => {
@@ -96,7 +98,7 @@ const DevToolPasswordGenerator = () => {
 
     const copyToClipboard = (password) => {
         navigator.clipboard.writeText(password);
-        alert('Contraseña copiada al portapapeles!');
+        showToast('Contraseña copiada al portapapeles!', 'success');
     };
 
     useEffect(() => {

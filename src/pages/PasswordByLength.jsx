@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 
 const PasswordByLength = () => {
     const [length, setLength] = useState(12);
     const [passwords, setPasswords] = useState([]);
+    const showToast = useToast();
 
     // Función para generar una contraseña aleatoria
     const generatePassword = (length) => {
@@ -75,7 +77,7 @@ const PasswordByLength = () => {
 
     const copyToClipboard = (password) => {
         navigator.clipboard.writeText(password);
-        alert('Contraseña copiada al portapapeles!');
+        showToast('Contraseña copiada al portapapeles!', 'success');
     };
 
     return (

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 
 const PasswordFromText = () => {
     const [baseText, setBaseText] = useState('');
     const [passwords, setPasswords] = useState(Array(4).fill({ password: '', strength: '', length: 0, generatedAt: '' }));
     const [length, setLength] = useState(12);
+    const showToast = useToast();
 
     // Genera un texto aleatorio de longitud específica
     const generateRandomText = (length) => {
@@ -78,7 +80,7 @@ const PasswordFromText = () => {
 
     const copyToClipboard = (password) => {
         navigator.clipboard.writeText(password);
-        alert('Contraseña copiada al portapapeles!');
+        showToast('Contraseña copiada al portapapeles!', 'success');
     };
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaClipboard } from 'react-icons/fa';
+import { useToast } from '../hooks/useToast';
 import Container from '../components/Container';
 
 const keyTypes = [
@@ -16,6 +17,7 @@ const keyTypes = [
 const PasswordByType = () => {
     const [selectedKeyType, setSelectedKeyType] = useState(keyTypes[0]); // Inicializado con '160-bit WPA Key'
     const [passwords, setPasswords] = useState(Array(4).fill(''));
+    const showToast = useToast();
 
     // Función para generar una contraseña aleatoria
     const generatePassword = (length) => {
@@ -78,7 +80,7 @@ const PasswordByType = () => {
 
     const copyToClipboard = (password) => {
         navigator.clipboard.writeText(password);
-        alert('Contraseña copiada al portapapeles!');
+        showToast('Contraseña copiada al portapapeles!', 'success');
     };
 
     return (

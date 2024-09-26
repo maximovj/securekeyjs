@@ -7,9 +7,14 @@ import PasswordFromText from '../pages/PasswordFromText';
 import PasswordDevTool from '../pages/PasswordDevTool';
 import routes from './routes';
 
+// Modulo de notificaciones 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 const MainRoutes = () => {
     return (<>
         <BrowserRouter>
+            <ToastContainer />
             <Routes>
                 <Route path={routes.Root} element={<Layout />} >
                     <Route path={routes.Root} element={<Home />} />
