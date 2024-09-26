@@ -25,6 +25,9 @@ const Layout = () => {
                             <li>
                                 <a href={routes.PasswordFromText} className="hover:text-green-400">Por texto</a>
                             </li>
+                            <li>
+                                <a href={routes.PasswordDevTool} className="hover:text-green-400">Para DevTools</a>
+                            </li>
                         </ul>
                     </nav>
 
