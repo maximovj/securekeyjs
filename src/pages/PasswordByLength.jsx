@@ -17,6 +17,25 @@ const PasswordByLength = () => {
         return password;
     };
 
+    // Función para calcular el tiempo estimado para descifrar la contraseña
+    const calculateCrackTime = (password) => {
+        const charsetSize = 26 + 26 + 10 + 32; // minúsculas + mayúsculas + números + símbolos
+        const combinations = Math.pow(charsetSize, password.length);
+        const attemptsPerSecond = 1e9; // Suponiendo 1 mil millones de intentos por segundo
+        const seconds = combinations / attemptsPerSecond;
+
+        const minutes = seconds / 60;
+        const hours = minutes / 60;
+        const days = hours / 24;
+        const years = days / 365;
+
+        if (years >= 1) return `${years.toFixed(2)} años`;
+        if (days >= 1) return `${days.toFixed(2)} días`;
+        if (hours >= 1) return `${hours.toFixed(2)} horas`;
+        if (minutes >= 1) return `${minutes.toFixed(2)} minutos`;
+        return `${seconds.toFixed(2)} segundos`;
+    };
+
     // Función para evaluar la fortaleza de la contraseña
     const evaluateStrength = (password) => {
         let strength = 'Débil';
@@ -44,6 +63,7 @@ const PasswordByLength = () => {
             password: newPassword,
             strength: evaluateStrength(newPassword),
             length: newPassword.length,
+            crackTime: calculateCrackTime(newPassword),
             generatedAt: new Date().toLocaleString(),
             includesUppercase: /[A-Z]/.test(newPassword),
             includesLowercase: /[a-z]/.test(newPassword),
@@ -121,12 +141,11 @@ const PasswordByLength = () => {
                                     Fortaleza: <span className="font-bold text-sm">{item.strength}</span>
                                 </p>
                                 <p className="mt-1 text-gray-300 text-sm">Longitud: <span className="font-bold">{item.length}</span></p>
-                                <div className="mt-2">
-                                    <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{item.includesUppercase ? 'Sí' : 'No'}</span></p>
-                                    <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{item.includesLowercase ? 'Sí' : 'No'}</span></p>
-                                    <p className="text-gray-300 text-sm">Números: <span className="font-bold">{item.includesNumbers ? 'Sí' : 'No'}</span></p>
-                                    <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{item.includesSpecialChars ? 'Sí' : 'No'}</span></p>
-                                </div>
+                                <p className="text-gray-300 text-sm">Mayúsculas: <span className="font-bold">{item.includesUppercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Minúsculas: <span className="font-bold">{item.includesLowercase ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Números: <span className="font-bold">{item.includesNumbers ? 'Sí' : 'No'}</span></p>
+                                <p className="text-gray-300 text-sm">Caracteres Especiales: <span className="font-bold">{item.includesSpecialChars ? 'Sí' : 'No'}</span></p>
+                                <p className="mt-1 text-gray-300 text-sm">Tiempo de descifrado: <span className="font-bold">{item.crackTime}</span></p>
                             </div>
                             <button
                                 onClick={() => copyToClipboard(item.password)}
