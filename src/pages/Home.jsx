@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLink } from 'react-icons/fa';
+import KeyInspector from '../components/KeyInspector';
 import Container from '../components/Container';
 import routes from '../routes/routes.js';
 
@@ -44,6 +45,7 @@ const Home = () => {
         <Container>
             <div className="w-full max-w-4xl">
                 <div className="grid grid-cols-1 sm:grid-cols-1 gap-6">
+                    <KeyInspector />
                     {cards.map((card, index) => (
                         <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between h-min">
                             <div>
