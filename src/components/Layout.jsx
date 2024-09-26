@@ -20,7 +20,7 @@ const Layout = () => {
                                 <a href={routes.PasswordByLength} className="hover:text-green-400">Por Longitud</a>
                             </li>
                             <li>
-                                <a href={routes.Root} className="hover:text-green-400">About</a>
+                                <a href={routes.PasswordByType} className="hover:text-green-400">Por tipo</a>
                             </li>
                             <li>
                                 <a href={routes.Root} className="hover:text-green-400">Contact</a>
