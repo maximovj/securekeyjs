@@ -78,7 +78,7 @@ const PasswordFromText = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
-            <h1 className="text-3xl font-bold mb-4">Generar contraseña</h1>
+            <h1 className="text-3xl font-bold mb-4">Generador de Claves</h1>
             <div className="mb-4 w-full max-w-2xl">
                 <label htmlFor="length" className="block mb-2">Longitud Aleatoria: {length}</label>
                 <input
@@ -104,11 +104,11 @@ const PasswordFromText = () => {
                     onClick={handleGenerateFromText}
                     className="bg-purple-500 hover:bg-purple-400 text-white py-2 px-4 rounded mt-4 w-full"
                 >
-                    Generar 4 Contraseñas desde Texto
+                    Generar contraseña
                 </button>
             </div>
             <div className="w-full max-w-full">
-                <h2 className="text-xl font-semibold mb-4">Contraseñas Generadas:</h2>
+                <h2 className="text-xl font-semibold mb-4">4 Contraseñas Generadas:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {passwords.map((item, index) => (
                         <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between">
