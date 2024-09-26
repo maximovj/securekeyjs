@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (<nav>
-        <Link to={routes.Root} className="hover:text-green-400">
-            <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
+        <Link to={routes.Root} className="hover:text-green-400 inline-block">
+            <h1 className="text-2xl font-bold text-green-400  inline-block">SecureKeyJS</h1>
         </Link>
         <ul className="flex space-x-4">
             <li>
