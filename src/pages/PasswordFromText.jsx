@@ -106,6 +106,10 @@ const PasswordFromText = () => {
                     id="baseText"
                     value={baseText}
                     onChange={(e) => setBaseText(e.target.value)}
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck="false"
                     className="border border-gray-700 rounded p-2 bg-gray-800 text-white w-full"
                 />
                 <button
