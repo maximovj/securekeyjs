@@ -27,6 +27,12 @@ const Home = () => {
                 description: 'El generador te permite ingresar una longitud del texto (máximo 64) y un texto base para generar contraseñas.',
                 url: routes.PasswordFromText,
             },
+            {
+                id: 4,
+                title: 'Generador de contraseñas para herramientas de desarrollo',
+                description: 'El generador te permite generar contraseña las herramientas de desarrollo como: JWT Secret Key, Laravel APP Key, Express-session Secret, MongoDB Admin Password, MySQL Root Password, Redis Auth Password, AWS Access Key, Spring Boot Secret Key, PHP Session Key, Flask Secret Key, PostgreSQL User Password, RabbitMQ Password, Django Secret Key, ASP.NET Core Identity Secret, Node.js JWT Secret, Kubernetes API Secret Key, Stripe API Key, S3 Bucket Access Key, Jira API Secret Key [...]',
+                url: routes.PasswordDevTool,
+            },
         ]);
     }
 
@@ -39,7 +45,7 @@ const Home = () => {
             <div className="w-full max-w-4xl">
                 <div className="grid grid-cols-1 sm:grid-cols-1 gap-6">
                     {cards.map((card, index) => (
-                        <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between h-60">
+                        <div key={index} className="bg-gray-800 rounded shadow-lg p-4 transition-transform transform hover:scale-105 flex flex-col justify-between h-min">
                             <div>
                                 <p className="text-lg"><span className="font-bold break-words text-2xl">{card.title}</span></p>
                                 <p className={`mt-2 text-sm`}>
@@ -47,6 +53,7 @@ const Home = () => {
                                     <span className="font-base">{card.description}</span>
                                 </p>
                             </div>
+                            <div className='m-8'></div>
                             <Link
                                 to={card.url}
                                 className="bg-purple-500 hover:bg-purple-400 text-white py-1 px-2 rounded mt-4 flex items-center self-start"
