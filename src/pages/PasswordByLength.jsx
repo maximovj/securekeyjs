@@ -84,7 +84,7 @@ const PasswordByLength = () => {
         <Container>
             <h1 className="text-3xl font-bold mb-6">Generador de contraseñas por longitud</h1>
             <div className="mb-4 w-full max-w-2xl">
-                <label htmlFor="length" className="block mb-2">Longitud de la Contraseña:
+                <label htmlFor="length" className="block mb-2">Longitud de la contraseña:
                     <input
                         type="number"
                         value={length}
