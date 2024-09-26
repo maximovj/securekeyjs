@@ -4,7 +4,7 @@ import PasswordCard from './PasswordCard';
 import { useEffect } from 'react';
 
 const KeyInspector = () => {
-    const [keyText, setKeyText] = useState('');
+    const [keyText, setKeyText] = useState('password');
     const [password, setPassword] = useState({});
 
     // Función para generar la información de una contraseña
