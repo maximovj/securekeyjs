@@ -45,7 +45,7 @@ const KeyInspector = () => {
                 <div className='mb-4'>
                     <label htmlFor="keyText" className="block mb-2">Ingrese su clave/contraseña:</label>
                     <input
-                        type="text"
+                        type="password"
                         id="keyText"
                         value={keyText}
                         onChange={(e) => setKeyText(e.target.value)}

@@ -1,14 +1,28 @@
 /* eslint-disable react/prop-types */
-import { FaClipboard, FaRedo, FaExclamationTriangle, FaLightbulb } from 'react-icons/fa';
+import { useState } from 'react'; // Importar useState
+import { FaClipboard, FaRedo, FaExclamationTriangle, FaLightbulb, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const PasswordCard = ({ index, item, regeneratePassword, copyToClipboard }) => {
+    const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState); // Alternar visibilidad
+    };
+
     return (
         <div className="bg-neutral-700 p-6 rounded-lg shadow-xl flex flex-col justify-between gap-4">
             <div>
                 {item.name && (<h2 className="text-2xl font-semibold mb-2">{item.name}</h2>)}
                 <p className="break-words text-lg font-mono p-3 bg-neutral-600 rounded-lg text-white tracking-wide">
-                    {item.password}
+                    {showPassword ? item.password : '●●●●●●●●●●'}
                 </p>
+
+                <button
+                    onClick={togglePasswordVisibility}
+                    className="text-sm text-blue-400 hover:underline mt-2"
+                >
+                    {showPassword ? 'Ocultar' : 'Mostrar'} contraseña
+                </button>
 
                 {/* Barra de fortaleza visual */}
                 <div className="mt-3">
