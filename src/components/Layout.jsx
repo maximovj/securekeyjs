@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import routes from '../routes/routes.js';
+import NavBar from './NavBar';
 
 const Layout = () => {
     return (
@@ -9,27 +9,7 @@ const Layout = () => {
                 <div className="container mx-auto flex justify-between items-center">
 
                     {/* Left-side Menu Items */}
-                    <nav>
-                        {/* Center Title */}
-                        <h1 className="text-2xl font-bold text-green-400">SecureKeyJS</h1>
-                        <ul className="flex space-x-4">
-                            <li>
-                                <a href={routes.Root} className="hover:text-green-400">Home</a>
-                            </li>
-                            <li>
-                                <a href={routes.PasswordByLength} className="hover:text-green-400">Por Longitud</a>
-                            </li>
-                            <li>
-                                <a href={routes.PasswordByType} className="hover:text-green-400">Por tipo</a>
-                            </li>
-                            <li>
-                                <a href={routes.PasswordFromText} className="hover:text-green-400">Por texto</a>
-                            </li>
-                            <li>
-                                <a href={routes.PasswordDevTool} className="hover:text-green-400">Para DevTools</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <NavBar />
 
                     {/* Right-side Menu Items */}
                     <nav>
