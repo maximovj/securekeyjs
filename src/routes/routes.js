@@ -1,12 +1,9 @@
-const baseUrl = '/';
-
-console.log('baseUrl => ', baseUrl);
 const routes = {
-    Root: `${baseUrl}`,
-    PasswordByLength: `${baseUrl}password-by-length`,
-    PasswordByType: `${baseUrl}password-by-type`,
-    PasswordFromText: `${baseUrl}/password-from-text`,
-    PasswordDevTool: `${baseUrl}/password-dev-tool`,
+    Root: '/',
+    PasswordByLength: '/password-by-length',
+    PasswordByType: '/password-by-type',
+    PasswordFromText: '/password-from-text',
+    PasswordDevTool: '/password-dev-tool',
 };
 
 export default routes;
