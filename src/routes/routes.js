@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.BASE_URL || '/';
+const baseUrl = '/';
 
 console.log('baseUrl => ', baseUrl);
 const routes = {

@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const MainRoutes = () => {
     return (<>
-        <BrowserRouter basename={routes.Root}>
+        <BrowserRouter basename={'/securekeyjs/'}>
             <ToastContainer />
             <Routes>
                 <Route path={routes.Root} element={<Layout />} >
