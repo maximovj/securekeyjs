@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: PosBuild
-        run: npm run posbuild
+        run: mkdir -p ./dist/securekeyjs &&  cp -r ./dist/assets ./dist/securekeyjs
       - name: Show dir
         run: ls -las && cd ./dist && cat index.html && ls -las && cd assets && ls -las
       - name: Setup Pages
