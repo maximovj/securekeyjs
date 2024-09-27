@@ -39,6 +39,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: PosBuild
+        run: npm run posbuild
       - name: Show dir
         run: ls -las && cd ./dist && cat index.html && ls -las && cd assets && ls -las
       - name: Setup Pages

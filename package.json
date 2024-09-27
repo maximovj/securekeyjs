@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "posbuild": "mkdir -p ./dist/securekeyjs &&  cp -r ./dist/assets ./dist/securekeyjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
