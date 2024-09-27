@@ -39,8 +39,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Build
-        run: mkdir -p './dist/securekeyjs' &&  cp -r './dist/assets' './dist/securekeyjs/assets'
+      - name: Show dir
+        run: ls -las && cd ./dist && cat index.html && ls -las && cd assets && ls -las
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
