@@ -22,6 +22,7 @@ const MainRoutes = () => {
                     <Route path={routes.PasswordByType} element={<PasswordByType />} />
                     <Route path={routes.PasswordFromText} element={<PasswordFromText />} />
                     <Route path={routes.PasswordDevTool} element={<PasswordDevTool />} />
+                    <Route path={'*'} element={<h1>Error 404. Página no encontrada.</h1>} />
                 </Route>
             </Routes>
         </BrowserRouter>
