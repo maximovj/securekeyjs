@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const MainRoutes = () => {
     return (<>
-        <BrowserRouter>
+        <BrowserRouter basename={routes.BaseName}>
             <ToastContainer />
             <Routes>
                 <Route path={routes.Root} element={<Layout />} >
