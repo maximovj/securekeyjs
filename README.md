@@ -19,6 +19,7 @@ Además incluye información avanzada sobre "Análisis de Seguridad" sobre ataqu
 - Estilos de Tailwind CSS
 - Componentes funcionales de ReactJS
 - Hooks personalizados
+- Etiquetas de Open Graph (para SEO)
 
 # Requisitos
 
