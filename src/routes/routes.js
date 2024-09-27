@@ -1,6 +1,8 @@
+const baseUrl = import.meta.env.BASE_URL || '/';
+
 const routes = {
-    Root: '/',
-    PasswordByLength: '/password-by-length',
+    Root: `${baseUrl}`,
+    PasswordByLength: `${baseUrl}password-by-length`,
     PasswordByType: '/password-by-type',
     PasswordFromText: '/password-from-text',
     PasswordDevTool: '/password-dev-tool',
