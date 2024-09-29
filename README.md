@@ -1,6 +1,6 @@
 # SecureKeyJS
 
-Este repositorio contiene una práctica sobre ReactJS.
+Este repositorio contiene una proyecto sobre ReactJS.
 
 Consiste en crear un sitio web (single page) para generar contraseñas e inspeccionar claves, el sitio web proporciona información sobre la fortaleza, longitud, mayúsculas, minúsculas, números, caracteres especiales de cada clave/contraseña.
 
